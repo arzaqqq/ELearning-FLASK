@@ -37,9 +37,9 @@
           <div class="col-lg-3 col-md-6">
             <div class="card info-card">
               <div class="card-body">
-                <h5 class="card-title">Total Kursus</h5>
-                <p class="text-muted">Kelola semua kursus di platform Anda</p>
-                <a href="/admin/courses" class="btn btn-primary btn-sm">Lihat Kursus</a>
+                <h5 class="card-title">Total Pengajar</h5>
+                <p class="text-muted">Kelola data semua Pengajar</p>
+                <a href="{{ url_for('admin_teacher_route') }}" class="btn btn-primary btn-sm">Kelola Data</a>
               </div>
             </div>
           </div>
@@ -48,9 +48,9 @@
           <div class="col-lg-3 col-md-6">
             <div class="card info-card">
               <div class="card-body">
-                <h5 class="card-title">Total Pengajar</h5>
-                <p class="text-muted">Kelola semua pengajar</p>
-                <a href="/admin/teacher" class="btn btn-primary btn-sm">Lihat Pengajar</a>
+                <h5 class="card-title">Kursus Populer</h5>
+                <p class="text-muted">Kelola semua Kursus Populer</p>
+                <a href="{{ url_for('admin_courses_route') }}" class="btn btn-primary btn-sm">Kelola Data</a>
               </div>
             </div>
           </div>
@@ -59,9 +59,9 @@
           <div class="col-lg-3 col-md-6">
             <div class="card info-card">
               <div class="card-body">
-                <h5 class="card-title">Frontend Developers</h5>
-                <p class="text-muted">Kelola data developer frontend</p>
-                <a href="/admin/frontend" class="btn btn-primary btn-sm">Kelola Frontend</a>
+                <h5 class="card-title">Data Pelajar</h5>
+                <p class="text-muted">Kelola data semua pelajar</p>
+                <a href="{{ url_for('admin_student') }}" class="btn btn-primary btn-sm">kelola Data</a>
               </div>
             </div>
           </div>
@@ -70,9 +70,9 @@
           <div class="col-lg-3 col-md-6">
             <div class="card info-card">
               <div class="card-body">
-                <h5 class="card-title">Backend Developers</h5>
-                <p class="text-muted">Kelola data developer backend</p>
-                <a href="/admin/backend" class="btn btn-primary btn-sm">Kelola Backend</a>
+                <h5 class="card-title">Data Pesan</h5>
+                <p class="text-muted">Kelola data pesan masuk</p>
+                <a href="{{ url_for('admin_messages') }}" class="btn btn-primary btn-sm">Kelola Pesan</a>
               </div>
             </div>
           </div>
