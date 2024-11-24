@@ -1,0 +1,43 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Home - AEZAQ COURSES
+{% endblock %}
+
+{% block content %}
+
+<!-- Courses Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+            <h1>Our Popular Courses</h1>
+        </div>
+        <div class="row">
+            {% for frontend in frontends %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="rounded overflow-hidden mb-2">
+                    <!-- Display Course Image -->
+                    <img class="img-fluid" src="{{ url_for('static', filename='uploads/' + frontend.image) }}" alt="{{ frontend.title }}">
+                    <div class="bg-secondary p-4">
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="m-0 fs-2">
+                                <i class="far fa-clock text-primary mr-2"></i>{{ frontend.duration }}
+                            </p>                                 
+                        </div>
+                        <a class="h5" href="">{{ frontend.title }}</a>
+                        <div class="border-top mt-4 pt-4">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="m-0">RP. {{ frontend.price }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Courses End -->
+
+{% endblock %}

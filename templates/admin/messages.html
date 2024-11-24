@@ -1,0 +1,87 @@
+{% extends 'admin/layout/baseAdmin.html' %}
+
+{% block content %}
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Pesan</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Daftar Pesan</h5>
+
+                        <!-- Tabel Pesan -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Subjek</th>
+                                    <th>Pesan</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for message in messages %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ message.name }}</td>
+                                    <td>{{ message.email }}</td>
+                                    <td>{{ message.subject }}</td>
+                                    <td  style="max-width: 150px;">
+                                        {{ message.message[:50] }}{% if message.message|length > 50 %}...
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewMessage{{ message.id }}">Lihat Selengkapnya</a>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ message.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                    <td>
+                                        <a href="{{ url_for('delete_message', id=message.id) }}" 
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?');">
+                                           Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- End Tabel Pesan -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal untuk Pesan -->
+{% for message in messages %}
+<div class="modal fade" id="viewMessage{{ message.id }}" tabindex="-1" aria-labelledby="viewMessageLabel{{ message.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewMessageLabel{{ message.id }}">Pesan dari {{ message.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="overflow-wrap: break-word; word-break: break-word; white-space: normal;">
+                <p><strong>Subjek:</strong> {{ message.subject }}</p>
+                <p><strong>Email:</strong> {{ message.email }}</p>
+                <hr>
+                <p>{{ message.message }}</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'admin/layout/baseAdmin.html' %}
+
+{% block content %}
+<main id="main" class="main">
+
+    <!-- Tombol Tambah Data -->
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUiuxModal">
+        Tambah UI/UX Developer
+    </button>
+
+    <!-- Tabel Data -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Foto</th>
+                <th>Judul</th>
+                <th>Durasi</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for uiux in uiuxs %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><img src="{{ url_for('static', filename='uploads/' + uiux.image) }}" alt="{{ uiux.title }}" width="100"></td>
+                <td>{{ uiux.title }}</td>
+                <td>{{ uiux.duration }}</td>
+                <td>{{ uiux.price }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUiuxModal{{ uiux.id }}">
+                        Edit
+                    </button>
+                    <a href="/admin/uiux/delete/{{ uiux.id }}" class="btn btn-danger btn-sm">
+                        Hapus
+                    </a>
+                </td>
+            </tr>
+
+            <!-- Modal Edit -->
+            <div class="modal fade" id="editUiuxModal{{ uiux.id }}" tabindex="-1" aria-labelledby="editUiuxModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editUiuxModalLabel">Edit UI/UX Developer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="POST" action="/admin/uiux/edit/{{ uiux.id }}" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Judul</label>
+                                    <input type="text" name="title" class="form-control" value="{{ uiux.title }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="duration" class="form-label">Durasi</label>
+                                    <input type="text" name="duration" class="form-control" value="{{ uiux.duration }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Harga</label>
+                                    <input type="text" name="price" class="form-control" value="{{ uiux.price }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Foto</label>
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal Tambah -->
+    <div class="modal fade" id="addUiuxModal" tabindex="-1" aria-labelledby="addUiuxModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUiuxModalLabel">Tambah UI/UX Developer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="/admin/uiux" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul</label>
+                            <input type="text" name="title" class="form-control" placeholder="Judul Kursus" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Durasi</label>
+                            <input type="text" name="duration" class="form-control" placeholder="Durasi Kursus" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Harga</label>
+                            <input type="text" name="price" class="form-control" placeholder="Harga Kursus" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Foto</label>
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

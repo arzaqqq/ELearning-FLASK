@@ -1,0 +1,137 @@
+{% extends 'admin/layout/baseAdmin.html' %}
+
+{% block content %}
+<main id="main" class="main">
+
+    <!-- Tombol Tambah Data -->
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
+        Tambah Guru
+    </button>
+
+    <!-- Tabel Data Guru -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Foto</th>
+                <th>Nama</th>
+                <th>Keahlian</th>
+                <th>LinkedIn</th>
+                <th>Facebook</th>
+                <th>Instagram</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><img src="{{ url_for('static', filename='uploads/' + teacher.image) }}" alt="{{ teacher.name }}" width="200"></td>
+                <td>{{ teacher.name }}</td>
+                <td>{{ teacher.expertise }}</td>
+                <td><a href="{{ teacher.linkedin }}" target="_blank">LinkedIn</a></td>
+                <td><a href="{{ teacher.facebook }}" target="_blank">Facebook</a></td>
+                <td><a href="{{ teacher.instagram }}" target="_blank">Instagram</a></td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editTeacherModal{{ teacher.id }}">
+                        Edit
+                    </button>
+                    <a href="/admin/teacher/delete/{{ teacher.id }}" class="btn btn-danger btn-sm">
+                        Hapus
+                    </a>
+                </td>
+            </tr>
+
+            <!-- Modal Edit -->
+            <div class="modal fade" id="editTeacherModal{{ teacher.id }}" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editTeacherModalLabel">Edit Guru</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="POST" action="/admin/teacher/edit/{{ teacher.id }}" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama</label>
+                                    <input type="text" name="name" class="form-control" value="{{ teacher.name }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="expertise" class="form-label">Keahlian</label>
+                                    <input type="text" name="expertise" class="form-control" value="{{ teacher.expertise }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="linkedin" class="form-label">LinkedIn URL</label>
+                                    <input type="url" name="linkedin" class="form-control" value="{{ teacher.linkedin }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="facebook" class="form-label">Facebook URL</label>
+                                    <input type="url" name="facebook" class="form-control" value="{{ teacher.facebook }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="instagram" class="form-label">Instagram URL</label>
+                                    <input type="url" name="instagram" class="form-control" value="{{ teacher.instagram }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Foto</label>
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal Tambah -->
+    <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTeacherModalLabel">Tambah Guru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="/admin/teacher" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" name="name" class="form-control" placeholder="Nama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="expertise" class="form-label">Keahlian</label>
+                            <input type="text" name="expertise" class="form-control" placeholder="Keahlian" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkedin" class="form-label">LinkedIn URL</label>
+                            <input type="url" name="linkedin" class="form-control" placeholder="LinkedIn URL">
+                        </div>
+                        <div class="mb-3">
+                            <label for="facebook" class="form-label">Facebook URL</label>
+                            <input type="url" name="facebook" class="form-control" placeholder="Facebook URL">
+                        </div>
+                        <div class="mb-3">
+                            <label for="instagram" class="form-label">Instagram URL</label>
+                            <input type="url" name="instagram" class="form-control" placeholder="Instagram URL">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Foto</label>
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

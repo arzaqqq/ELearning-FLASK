@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <!-- MDB Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .bg-dark {
+            background-color: #343a40 !important;
+            color: white;
+        }
+        .alert-container {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+<section class="h-100" style="background:#6c757d">
+    <!-- Flash Messages -->
+    <div class="alert-container mb-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                          
+                        </div>
+                        <!-- Redirect jika flash message adalah success -->
+                        {% if category == 'success' %}
+                            <script>
+                                setTimeout(() => {
+                                    window.location.href = "{{ url_for('login_student') }}";
+                                }, 1500); // Redirect setelah 4 detik
+                            </script>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Registration Form Section -->
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <!-- Left Image Section -->
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                alt="Sample photo" class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                        <!-- Right Form Section -->
+                        <div class="col-xl-6">
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-5 text-uppercase">Daftar akun Aezaq Courses</h3>
+                                <form method="POST" action="{{ url_for('register_student') }}">
+                                    <!-- Username -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="username" name="username" class="form-control form-control-lg" required />
+                                        <label class="form-label" for="username">Username</label>
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="form-outline mb-4">
+                                        <input type="email" id="email" name="email" class="form-control form-control-lg" required />
+                                        <label class="form-label" for="email">Email</label>
+                                    </div>
+                                    <!-- Phone -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="phone" name="phone" class="form-control form-control-lg" required />
+                                        <label class="form-label" for="phone">Phone</label>
+                                    </div>
+                                    <!-- Password -->
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" required />
+                                        <label class="form-label" for="password">Password</label>
+                                    </div>
+                                    <!-- Form Actions -->
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                        <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Form Section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MDB Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
+</body>
+</html>

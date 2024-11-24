@@ -1,0 +1,88 @@
+{% extends 'admin/layout/baseAdmin.html' %}
+
+{% block content %}
+
+<main id="main" class="main">
+
+  <!-- Dashboard Header -->
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <!-- Dashboard Content -->
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Welcome Card -->
+      <div class="col-12">
+        <div class="card info-card">
+          <div class="card-body">
+            <h5 class="card-title">Selamat Datang, {{ current_user.username }}! 🎉</h5>
+            <p>Anda login sebagai <strong>{{ current_user.role }}</strong>. Akses penuh tersedia untuk admin.</p>
+          </div>
+        </div>
+      </div><!-- End Welcome Card -->
+
+      <!-- Quick Links -->
+      <div class="col-lg-12">
+        <div class="row">
+          
+          <!-- Card 1 -->
+          <div class="col-lg-3 col-md-6">
+            <div class="card info-card">
+              <div class="card-body">
+                <h5 class="card-title">Total Kursus</h5>
+                <p class="text-muted">Kelola semua kursus di platform Anda</p>
+                <a href="/admin/courses" class="btn btn-primary btn-sm">Lihat Kursus</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-lg-3 col-md-6">
+            <div class="card info-card">
+              <div class="card-body">
+                <h5 class="card-title">Total Pengajar</h5>
+                <p class="text-muted">Kelola semua pengajar</p>
+                <a href="/admin/teacher" class="btn btn-primary btn-sm">Lihat Pengajar</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-lg-3 col-md-6">
+            <div class="card info-card">
+              <div class="card-body">
+                <h5 class="card-title">Frontend Developers</h5>
+                <p class="text-muted">Kelola data developer frontend</p>
+                <a href="/admin/frontend" class="btn btn-primary btn-sm">Kelola Frontend</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col-lg-3 col-md-6">
+            <div class="card info-card">
+              <div class="card-body">
+                <h5 class="card-title">Backend Developers</h5>
+                <p class="text-muted">Kelola data developer backend</p>
+                <a href="/admin/backend" class="btn btn-primary btn-sm">Kelola Backend</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- End Row -->
+      </div><!-- End Quick Links -->
+
+    </div>
+  </section>
+
+</main><!-- End Main -->
+
+{% endblock %}
