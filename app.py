@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from models import db
 from models.user import UserModel
@@ -18,6 +18,7 @@ from controllers.uiux_controller import admin_uiux, add_uiux, edit_uiux, delete_
 from controllers.mobile_controller import admin_mobile, add_mobile, edit_mobile, delete_mobile
 from controllers.message_controller import save_message
 from flask_migrate import Migrate
+from functools import wraps
 import hashlib
 
 app = Flask(__name__)
@@ -44,29 +45,31 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 
-
-
-
 # Routes Front-end
 @app.route('/')
+
 def home():
     courses = CourseModel.query.all()
     teachers = TeacherModel.query.all()
-    return render_template('index.html', courses=courses , teachers=teachers)
+    return render_template('index.html', courses=courses, teachers=teachers)
 
 @app.route('/about')
+
 def about():
     return render_template('about.html')
 
 @app.route('/blog')
+
 def blog():
     return render_template('blog.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
+
 def contact():
     if request.method == 'POST':
         return save_message()
     return render_template('contact.html')
+
 
 @app.route('/admin/messages')
 @login_required

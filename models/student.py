@@ -1,4 +1,3 @@
-# models/student.py
 from models import db
 from flask_login import UserMixin
 import hashlib
@@ -10,8 +9,10 @@ class StudentModel(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.String(15), unique=True, nullable=True)  # Tambahkan kolom nomor HP
+    phone = db.Column(db.String(15), unique=True, nullable=True)  # Kolom nomor HP
+    role = db.Column(db.String(20), default='student')  # Tambahkan kolom role dengan default 'student'
 
+    @staticmethod
     def hash_password(password):
         return hashlib.sha256(password.encode()).hexdigest()
 
