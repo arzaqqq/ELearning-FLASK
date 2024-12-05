@@ -4,8 +4,8 @@ from app import app  # Pastikan app diimport
 
 with app.app_context():
     # Tambah pengguna baru
-    username = "Miftahul Arzaq"
-    password = hash_password("mirza12345")
+    username = "abdul"
+    password = hash_password("abdul12345")
     role = "admin"  # atau "user"
 
     new_user = UserModel(username=username, password=password, role=role)

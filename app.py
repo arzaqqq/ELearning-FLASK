@@ -47,24 +47,20 @@ def hash_password(password):
 
 # Routes Front-end
 @app.route('/')
-
 def home():
     courses = CourseModel.query.all()
     teachers = TeacherModel.query.all()
     return render_template('index.html', courses=courses, teachers=teachers)
 
 @app.route('/about')
-
 def about():
     return render_template('about.html')
 
 @app.route('/blog')
-
 def blog():
     return render_template('blog.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
-
 def contact():
     if request.method == 'POST':
         return save_message()

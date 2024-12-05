@@ -67,7 +67,7 @@ Home - AEZAQ COURSES
                     <span class="text-primary" style="font-size: 1.5em">Aezaq Courses</span> adalah platform e-learning inovatif yang dirancang untuk membantu Anda belajar berbagai ilmu dan keterampilan dengan mudah dari rumah tanpa harus keluar, serta dapat diakses dengan harga yang terjangkau untuk semua kalangan, termasuk pelajar. Kami menawarkan beragam kursus menarik seperti Front-End Development, Back-End Development, UI/UX Design, Mobile App Development, Digital Marketing, Bahasa Asing, dan banyak lagi, yang diajarkan oleh para profesional dengan materi terkini. Dengan Aezaq Course, kami percaya bahwa setiap orang memiliki potensi besar untuk berkembang, sehingga kami hadir untuk mendukung perjalanan belajar Anda agar lebih fleksibel, efektif, dan menyenangkan. Mari wujudkan impian Anda bersama Aezaq Course!
                 </p>
                 
-                <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Hubungi Kami</a>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@ Home - AEZAQ COURSES
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" src="static/img/cat-3.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
+                    <a class="cat-overlay text-white text-decoration-none" href="{{ url_for('kursus_uiux')}}">
                         <h4 class="text-white font-weight-medium">UI & UX</h4>
                         <span>100 Courses</span>
                     </a>
@@ -113,7 +113,7 @@ Home - AEZAQ COURSES
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" src="static/img/cat-4.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
+                    <a class="cat-overlay text-white text-decoration-none" href="{{ url_for('kursus_mobile')}}">
                         <h4 class="text-white font-weight-medium">Mobile Developer</h4>
                         <span>100 Courses</span>
                     </a>
